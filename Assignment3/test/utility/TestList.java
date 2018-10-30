@@ -3,12 +3,10 @@
  */
 package utility;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author 758243
@@ -168,7 +166,7 @@ class TestList
 	 */
 	@Test
 	void testAddNotEmpty() {
-		list.add(integer1)
+		list.add(integer1);
 		assertTrue(list.add(integer2));
 		assertEquals(2, list.size());
 		assertEquals(integer2, list.get(1));
@@ -231,7 +229,7 @@ class TestList
 	}
 
 	/**
-	 * Test method for {@link utility.MyArrayList#toArray(E[])}.
+	 * Test method for ToArray.
 	 */
 	@Test
 	void testToArrayEArray() {
