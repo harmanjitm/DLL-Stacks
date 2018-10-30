@@ -113,7 +113,7 @@ public interface List<E> extends Serializable
 	 * @return The element at the specified position in this list.
 	 * @throws IndexOutOfBoundsException
 	 * 			If the index is out of range: 
-	 * 			i.e. (<code>index < 0 || index > size()</code>).
+	 * 			i.e. (<code>index < 0 || index >= size()</code>).
 	 */
 	public E get (int index) throws IndexOutOfBoundsException;
 	
@@ -128,7 +128,7 @@ public interface List<E> extends Serializable
 	 * @return The removed element.
 	 * @throws IndexOutOfBoundsException
 	 * 			If the index is out of range: 
-	 * 			i.e. (<code>index < 0 || index > size()</code>).
+	 * 			i.e. (<code>index < 0 || index >= size()</code>).
 	 */
 	public E remove (int index) throws IndexOutOfBoundsException;
 	
@@ -165,7 +165,7 @@ public interface List<E> extends Serializable
 	 * 			<code>null</code> elements.
 	 * @throws IndexOutOfBoundsException
 	 * 			If the index is out of range: 
-	 * 			i.e. (<code>index < 0 || index > size()</code>).
+	 * 			i.e. (<code>index < 0 || index >= size()</code>).
 	 */
 	public E set (int index, E toChange) throws NullPointerException,
 												IndexOutOfBoundsException;
