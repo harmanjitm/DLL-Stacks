@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class TestList
 {
 	private List<Integer> list;
+	private List<Integer> testList;
 	private Integer integer1 = 1;
 	private Integer integer2 = 2;
 	private Integer integer3 = 3;
@@ -22,6 +23,7 @@ class TestList
 	@BeforeEach
 	void setUp() {
 		list = new MyArrayList<>();
+		testList = new MyArrayList<>();
 	}
 
 	/**
@@ -91,7 +93,7 @@ class TestList
 	 * Test method for {@link utility.MyArrayList#add(int, java.lang.Object)} when the list not is empty.
 	 */
 	@Test
-	void testAddIntNotEmptyMidle() 
+	void testAddIntNotEmptyMiddle()
 	{
 		list.add(integer1);
 		list.add(integer3);
@@ -146,6 +148,23 @@ class TestList
 			assertTrue(true);
 		}
 	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#add(int, java.lang.Object)} for NullPointerException.
+	 */
+	@Test
+	void testAddIntNullPointerException()
+	{
+		try
+		{
+			list.add(0, null);
+			fail("NullPointerException was not thrown");
+		}
+		catch(NullPointerException e)
+		{
+			assertTrue(true);
+		}
+	}
 	
 	/**
 	 * Test method for {@link utility.MyArrayList#add(java.lang.Object)} when list is empty.
@@ -158,6 +177,22 @@ class TestList
 	}
 	
 	/**
+	 * Test method for {@link utility.MyArrayList#add(java.lang.Object)} for a NullPointerException.
+	 */
+	@Test
+	void testAddNullPointerException() {
+		try
+		{
+			list.add(null);
+			fail("NullPointerException was not thrown");
+		}
+		catch(NullPointerException e)
+		{
+			assertTrue(true);
+		}
+	}
+
+	/**
 	 * Test method for {@link utility.MyArrayList#add(java.lang.Object)} when list is not empty.
 	 */
 	@Test
@@ -169,11 +204,82 @@ class TestList
 	}
 
 	/**
-	 * Test method for {@link utility.MyArrayList#addAll(utility.List)}.
+	 * Test method for {@link utility.MyArrayList#addAll(utility.List)}. when the list is empty and added list is not empty
 	 */
 	@Test
-	void testAddAll() {
-		fail("Not yet implemented");
+	void testAddAllEmptyNotEmpty() {
+		testList.add(integer1);
+		assertEquals(1,testList.size());
+		assertTrue(list.addAll(testList));
+		assertEquals(integer1,list.get(0));
+		assertEquals(1,list.size());
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#addAll(utility.List)}. when the list is empty and added list is empty
+	 */
+	@Test
+	void testAddAllEmptyEmpty() {
+		assertTrue(list.addAll(testList));
+		assertEquals(0,list.size());
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#addAll(utility.List)}. when the list is not empty and added list is empty
+	 */
+	@Test
+	void testAddAllNotEmptyEmpty() {
+		list.add(integer2);
+		assertEquals(1,list.size());
+		assertTrue(list.addAll(testList));
+		assertEquals(integer2,list.get(0));
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#addAll(utility.List)}. when the list is not empty and added list is not empty
+	 */
+	@Test
+	void testAddAllNotEmptyNotEmpty() {
+		list.add(integer1);
+		testList.add(integer2);
+		testList.add(integer3);
+		assertEquals(1,list.size());
+		assertEquals(1,testList.size());
+		assertTrue(list.addAll(testList));
+		assertEquals(integer3,list.get(2));
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#addAll(utility.List)}. for NullPointerException when list is empty
+	 */
+	@Test
+	void testAddAllNullPointerExceptionEmpty() {
+		try
+		{
+			list.addAll(null);
+			fail("NullPointerException was not caught for addAll method");
+		}
+		catch (NullPointerException e)
+		{
+			assertTrue(true);
+		}
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#addAll(utility.List)}. for NullPointerException when list is not empty
+	 */
+	@Test
+	void testAddAllNullPointerExceptionNotEmpty() {
+		list.add(integer3);
+		try
+		{
+			assertTrue(list.addAll(null));
+			fail("NullPointerException was not caught for addAll method when main list is not empty");
+		}
+		catch (NullPointerException e)
+		{
+			assertTrue(true);
+		}
 	}
 
 	/**
