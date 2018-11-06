@@ -363,23 +363,134 @@ class TestList
 	}
 
 	/**
-	 * Test method for {@link utility.MyArrayList#remove(java.lang.Object)}.
+	 * Test method for {@link utility.MyArrayList#remove(java.lang.Object)}. when list is empty
 	 */
 	@Test
-	void testRemoveE() {
+	void testRemoveEmpty() {
 		fail("Not yet implemented");
 	}
 
 	/**
-	 * Test method for {@link utility.MyArrayList#set(int, java.lang.Object)}.
+	 * Test method for {@link utility.MyArrayList#remove(java.lang.Object)}. when list is not empty but doesn't contain item
 	 */
 	@Test
-	void testSet() {
+	void testRemoveNotEmpty() {
 		fail("Not yet implemented");
 	}
 
 	/**
-	 * Test method for {@link utility.MyArrayList#isEmpty()}.
+	 * Test method for {@link utility.MyArrayList#remove(java.lang.Object)}. when list is not empty but contains item being removed
+	 */
+	@Test
+	void testRemoveNotEmptyInList() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#remove(java.lang.Object)}. for NullPointerException when list is empty
+	 */
+	@Test
+	void testRemoveNullPointerExceptionEmpty() {
+		try
+		{
+			list.remove(null);
+			fail("NullPointerException was not caught when removing item and list is empty");
+		}
+		catch (NullPointerException e) {
+			assertTrue(true);
+		}
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#remove(java.lang.Object)}. for NullPointerException when list is not empty
+	 */
+	@Test
+	void testRemoveNullPointerExceptionNotEmpty() {
+		list.add(integer1);
+		try
+		{
+			list.remove(null);
+			fail("NullPointerException was not caught when removing item and list is not empty");
+		}
+		catch (NullPointerException e) {
+			assertTrue(true);
+		}
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#set(int, java.lang.Object)}. set the first index
+	 */
+	@Test
+	void testSetFirst() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#set(int, java.lang.Object)}. set the middle index
+	 */
+	@Test
+	void testSetMiddle() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#set(int, java.lang.Object)}. set the last value
+	 */
+	@Test
+	void testSetLast() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#set(int, java.lang.Object)}. set the value when list is empty
+	 */
+	@Test
+	void testSetEmpty() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#set(int, java.lang.Object)}.when setting a value to null
+	 */
+	@Test
+	void testSetValueNullPointerException() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#set(int, java.lang.Object)}.when setting a null index
+	 */
+	@Test
+	void testSetIndexNullPointerException() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#set(int, java.lang.Object)}. when index is less than 0
+	 */
+	@Test
+	void testSetIndexOutOfBoundsExceptionLow() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#set(int, java.lang.Object)}. when index is greater than size
+	 */
+	@Test
+	void testSetIndexOutOfBoundsExceptionHigh() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#set(int, java.lang.Object)}. when index is equal to size
+	 */
+	@Test
+	void testSetIndexOutOfBoundsExceptionEqual() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#isEmpty()}. when the list is empty
 	 */
 	@Test
 	void testIsEmpty() {
@@ -387,34 +498,106 @@ class TestList
 	}
 
 	/**
-	 * Test method for {@link utility.MyArrayList#contains(java.lang.Object)}.
+	 * Test method for {@link utility.MyArrayList#isEmpty()}. when the list is not empty
 	 */
 	@Test
-	void testContains() {
+	void testIsEmptyNotEmpty() {
 		fail("Not yet implemented");
 	}
 
 	/**
-	 * Test method for ToArray.
+	 * Test method for {@link utility.MyArrayList#contains(java.lang.Object)}. when checking an empty list
 	 */
 	@Test
-	void testToArrayEArray() {
+	void testContainsEmpty() {
 		fail("Not yet implemented");
 	}
 
 	/**
-	 * Test method for {@link utility.MyArrayList#toArray()}.
+	 * Test method for {@link utility.MyArrayList#contains(java.lang.Object)}. when checking a non empty list but value is there
 	 */
 	@Test
-	void testToArray() {
+	void testContainsNotEmptyExists() {
 		fail("Not yet implemented");
 	}
 
 	/**
-	 * Test method for {@link utility.MyArrayList#iterator()}.
+	 * Test method for {@link utility.MyArrayList#contains(java.lang.Object)}. when checking for a null value
 	 */
 	@Test
-	void testIterator() {
+	void testContainsNullPointerException() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#contains(java.lang.Object)}. when checking a non empty list but value isn't there
+	 */
+	@Test
+	void testContainsNotEmptyNotExists() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for ToArray. when the specified array is empty
+	 */
+	@Test
+	void testToArrayArrayEmpty() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for ToArray. when specified array is not empty
+	 */
+	@Test
+	void testToArrayArrayNotEmpty() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for ToArray. when specified array is null
+	 */
+	@Test
+	void testToArrayArrayNullPointerException() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for ToArray. when the total size is greater than max size of initial array
+	 */
+	@Test
+	void testToArrayArraySizeTooBig() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#toArray()}. when the list is empty
+	 */
+	@Test
+	void testToArrayEmpty() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#toArray()}. when the list is not empty
+	 */
+	@Test
+	void testToArrayNotEmpty() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#iterator()}. when list is empty
+	 */
+	@Test
+	void testIteratorEmpty() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#iterator()}. when list is not empty
+	 */
+	@Test
+	void testIteratorNotEmpty() {
 		fail("Not yet implemented");
 	}
 
