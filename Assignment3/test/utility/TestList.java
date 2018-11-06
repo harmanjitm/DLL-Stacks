@@ -283,19 +283,83 @@ class TestList
 	}
 
 	/**
-	 * Test method for {@link utility.MyArrayList#get(int)}.
+	 * Test method for {@link utility.MyArrayList#get(int)}. when list is empty
 	 */
 	@Test
-	void testGet() {
-		fail("Not yet implemented");
+	void testGetEmpty() {
+		//test for getting value of an empty list
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#get(int)}. when list is not empty get first
+	 */
+	@Test
+	void testGetNotEmptyFirst() {
+		//Test when getting value of a non empty list in the beginning
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#get(int)}. when list is not empty get middle
+	 */
+	@Test
+	void testGetNotEmptyMiddle() {
+		//Test when getting value of a non empty list in the middle
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#get(int)}. when list is not empty get last
+	 */
+	@Test
+	void testGetNotEmptyEnd() {
+		//Test when getting value of a non empty list at the end
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#get(int)}. when the index is <0 or greater than or equal to size
+	 */
+	@Test
+	void testGetIndexOutOfBoundsException() {
+		//test to see when the list is null and throws a IndexOutOfBoundsException
 	}
 
 	/**
 	 * Test method for {@link utility.MyArrayList#remove(int)}.
 	 */
 	@Test
-	void testRemoveInt() {
-		fail("Not yet implemented");
+	void testRemoveIntEmpty() {
+
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#remove(int)}.
+	 */
+	@Test
+	void testRemoveIntNotEmptyFirst() {
+
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#remove(int)}.
+	 */
+	@Test
+	void testRemoveIntNotEmptyMiddle() {
+
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#remove(int)}.
+	 */
+	@Test
+	void testRemoveIntNotEmptyEnd() {
+
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#remove(int)}.
+	 */
+	@Test
+	void testRemoveIntIndexOutOfBoundsException() {
+
 	}
 
 	/**
