@@ -383,7 +383,8 @@ class TestList
 	 */
 	@Test
 	void testRemoveIntEmpty() {
-
+		assertEquals(null,list.remove(0));
+		assertEquals(0,list.size());
 	}
 
 	/**
@@ -391,7 +392,10 @@ class TestList
 	 */
 	@Test
 	void testRemoveIntNotEmptyFirst() {
-
+		list.add(integer3);
+		list.add(integer2);
+		assertEquals(integer3,list.remove(0));
+		assertEquals(1,list.size());
 	}
 
 	/**
@@ -399,7 +403,12 @@ class TestList
 	 */
 	@Test
 	void testRemoveIntNotEmptyMiddle() {
-
+		list.add(integer1);
+		list.add(integer2);
+		list.add(integer3);
+		assertEquals(3,list.size());
+		assertEquals(integer2,list.remove(1));
+		assertEquals(2,list.size());
 	}
 
 	/**
@@ -407,7 +416,12 @@ class TestList
 	 */
 	@Test
 	void testRemoveIntNotEmptyEnd() {
-
+		list.add(integer1);
+		list.add(integer2);
+		list.add(integer3);
+		assertEquals(3,list.size());
+		assertEquals(integer3,list.remove(2));
+		assertEquals(2,list.size());
 	}
 
 	/**
@@ -415,7 +429,16 @@ class TestList
 	 */
 	@Test
 	void testRemoveIntIndexOutOfBoundsExceptionLow() {
-
+		list.add(integer1);
+		try
+		{
+			list.remove(-1);
+			fail("IndexOutOfBoundsException was not thrown for removing less than a 0 index");
+		}
+		catch (IndexOutOfBoundsException e)
+		{
+			assertTrue(true);
+		}
 	}
 
 	/**
@@ -423,7 +446,15 @@ class TestList
 	 */
 	@Test
 	void testRemoveIntIndexOutOfBoundsExceptionEqual() {
-
+		try
+		{
+			list.remove(0);
+			fail("IndexOutOfBoundsException was not thrown for removing index that is equal to size");
+		}
+		catch (IndexOutOfBoundsException e)
+		{
+			assertTrue(true);
+		}
 	}
 
 	/**
@@ -431,7 +462,15 @@ class TestList
 	 */
 	@Test
 	void testRemoveIntIndexOutOfBoundsExceptionHigh() {
-
+		try
+		{
+			list.remove(1);
+			fail("IndexOutOfBoundsException was not thrown for removing an index greater than size");
+		}
+		catch (IndexOutOfBoundsException e)
+		{
+			assertTrue(true);
+		}
 	}
 
 	/**
@@ -439,7 +478,7 @@ class TestList
 	 */
 	@Test
 	void testRemoveEmpty() {
-		fail("Not yet implemented");
+		assertEquals(null,list.remove(integer1));
 	}
 
 	/**
@@ -447,7 +486,8 @@ class TestList
 	 */
 	@Test
 	void testRemoveNotEmpty() {
-		fail("Not yet implemented");
+		list.add(integer3);
+		assertEquals(integer1,list.remove(integer1));
 	}
 
 	/**
@@ -455,7 +495,7 @@ class TestList
 	 */
 	@Test
 	void testRemoveNotEmptyInList() {
-		fail("Not yet implemented");
+
 	}
 
 	/**
