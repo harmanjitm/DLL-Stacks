@@ -1,6 +1,3 @@
-/**
- * 
- */
 package utility;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -12,19 +9,18 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author 758243
  *
  */
-class TestList 
+@SuppressWarnings("JavaDoc")
+class TestList
 {
-	List<Integer> list;
-	Integer integer1 = 1;
-	Integer integer2 = 2;
-	Integer integer3 = 3;
+	private List<Integer> list;
+	private Integer integer1 = 1;
+	private Integer integer2 = 2;
+	private Integer integer3 = 3;
 	
 	/**
-	 * @throws java.lang.Exception
 	 */
 	@BeforeEach
-	void setUp() throws Exception 
-	{
+	void setUp() {
 		list = new MyArrayList<>();
 	}
 
@@ -51,7 +47,7 @@ class TestList
 	 * Test method for {@link utility.MyArrayList#clear()} when the list is empty.
 	 */
 	@Test
-	void testClearEmpty() 
+	void testClearEmptyList()
 	{
 		list.clear();
 		assertEquals(0, list.size());
@@ -61,7 +57,7 @@ class TestList
 	 * Test method for {@link utility.MyArrayList#clear()} when the list is not empty.
 	 */
 	@Test
-	void testClearNotEmpty() 
+	void testClearNotEmptyList()
 	{
 		list.add(integer1);
 		list.clear();

@@ -1,5 +1,7 @@
 package utility;
 
+import java.util.NoSuchElementException;
+
 public class MyArrayList<E> implements List<E>{
 
 	private E[] array;
@@ -11,7 +13,7 @@ public class MyArrayList<E> implements List<E>{
 	{
 		array = (E[]) new Object[10];
 	}
-	
+
 	@Override
 	public int size() {
 		return size;
@@ -20,7 +22,7 @@ public class MyArrayList<E> implements List<E>{
 	@Override
 	public void clear() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -31,7 +33,7 @@ public class MyArrayList<E> implements List<E>{
 
 	@Override
 	public boolean add(E toAdd) throws NullPointerException, IndexOutOfBoundsException {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
@@ -67,7 +69,10 @@ public class MyArrayList<E> implements List<E>{
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
+		if (size == 0)
+		{
+			return true;
+		}
 		return false;
 	}
 
@@ -95,4 +100,29 @@ public class MyArrayList<E> implements List<E>{
 		return null;
 	}
 
+	@SuppressWarnings("unused")
+	private class ArrayBasedIterator implements Iterator<E>
+	{
+		private int pos;
+
+		@Override
+		public boolean hasNext() {
+			return pos < size;
+		}
+
+		@Override
+		public E next() throws NoSuchElementException {
+			try
+			{
+				E toReturn = array[pos];
+				pos++;
+				return toReturn;
+			}
+			catch(IndexOutOfBoundsException e)
+			{
+				throw new NoSuchElementException();
+			}
+		}
+
+	}
 }

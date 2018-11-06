@@ -231,5 +231,5 @@ public interface List<E> extends Serializable
 	 * 			<code>linearUtilities.Iterator<E></code>,
 	 * 			not <code>java.util.Iterator</code>.
 	 */
-	public Iterator<E> iterator ();	
+	public Iterator<E> iterator ();
 }
