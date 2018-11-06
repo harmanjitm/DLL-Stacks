@@ -21,8 +21,8 @@ public class MyArrayList<E> implements List<E>{
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-
+		array = null;
+		size = 0;
 	}
 
 	@Override

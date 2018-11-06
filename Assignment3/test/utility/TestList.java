@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * @author 758243
+ * @author Harmanjit Mohaar
  *
  */
 @SuppressWarnings("JavaDoc")
@@ -53,6 +53,7 @@ class TestList
 	{
 		list.clear();
 		assertEquals(0, list.size());
+		assertTrue(list.add(integer1));
 	}
 
 	/**
@@ -287,7 +288,8 @@ class TestList
 	 */
 	@Test
 	void testGetEmpty() {
-		//test for getting value of an empty list
+		assertEquals(0,list.size());
+		assertEquals(null,list.get(0));
 	}
 
 	/**
@@ -295,7 +297,10 @@ class TestList
 	 */
 	@Test
 	void testGetNotEmptyFirst() {
-		//Test when getting value of a non empty list in the beginning
+		list.add(integer1);
+		list.add(integer2);
+		assertEquals(integer1,list.get(0));
+		assertEquals(2,list.size());
 	}
 
 	/**
@@ -303,7 +308,11 @@ class TestList
 	 */
 	@Test
 	void testGetNotEmptyMiddle() {
-		//Test when getting value of a non empty list in the middle
+		list.add(integer1);
+		list.add(integer2);
+		list.add(integer3);
+		assertEquals(3,list.size());
+		assertEquals(integer2,list.get(1));
 	}
 
 	/**
@@ -311,19 +320,66 @@ class TestList
 	 */
 	@Test
 	void testGetNotEmptyEnd() {
-		//Test when getting value of a non empty list at the end
+		list.add(integer1);
+		list.add(integer2);
+		list.add(integer3);
+		assertEquals(3,list.size());
+		assertEquals(integer3,list.get(2));
 	}
 
 	/**
-	 * Test method for {@link utility.MyArrayList#get(int)}. when the index is <0 or greater than or equal to size
+	 * Test method for {@link utility.MyArrayList#get(int)}. when the index is less than 0
 	 */
 	@Test
-	void testGetIndexOutOfBoundsException() {
-		//test to see when the list is null and throws a IndexOutOfBoundsException
+	void testGetIndexOutOfBoundsExceptionLow() {
+		list.add(integer3);
+		try
+		{
+			list.get(-1);
+			fail("IndexOutOfBoundsException was not caught for getting low index");
+		}
+		catch (IndexOutOfBoundsException e)
+		{
+			assertTrue(true);
+		}
 	}
 
 	/**
-	 * Test method for {@link utility.MyArrayList#remove(int)}.
+	 * Test method for {@link utility.MyArrayList#get(int)}. when the index is equal to the size
+	 */
+	@Test
+	void testGetIndexOutOfBoundsExceptionEqual() {
+		list.add(integer3);
+		try
+		{
+			list.get(1);
+			fail("IndexOutOfBoundsException was not caught for getting equal index");
+		}
+		catch (IndexOutOfBoundsException e)
+		{
+			assertTrue(true);
+		}
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#get(int)}. when the index is greater than size
+	 */
+	@Test
+	void testGetIndexOutOfBoundsExceptionHigh() {
+		list.add(integer3);
+		try
+		{
+			list.get(1);
+			fail("IndexOutOfBoundsException was not caught for getting high index");
+		}
+		catch (IndexOutOfBoundsException e)
+		{
+			assertTrue(true);
+		}
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#remove(int)}. when removing index from empty list
 	 */
 	@Test
 	void testRemoveIntEmpty() {
@@ -331,7 +387,7 @@ class TestList
 	}
 
 	/**
-	 * Test method for {@link utility.MyArrayList#remove(int)}.
+	 * Test method for {@link utility.MyArrayList#remove(int)}. when removing first item from non empty list
 	 */
 	@Test
 	void testRemoveIntNotEmptyFirst() {
@@ -339,7 +395,7 @@ class TestList
 	}
 
 	/**
-	 * Test method for {@link utility.MyArrayList#remove(int)}.
+	 * Test method for {@link utility.MyArrayList#remove(int)}. when removing middle item from non empty list
 	 */
 	@Test
 	void testRemoveIntNotEmptyMiddle() {
@@ -347,7 +403,7 @@ class TestList
 	}
 
 	/**
-	 * Test method for {@link utility.MyArrayList#remove(int)}.
+	 * Test method for {@link utility.MyArrayList#remove(int)}. when removing last item from non empty list
 	 */
 	@Test
 	void testRemoveIntNotEmptyEnd() {
@@ -355,10 +411,26 @@ class TestList
 	}
 
 	/**
-	 * Test method for {@link utility.MyArrayList#remove(int)}.
+	 * Test method for {@link utility.MyArrayList#remove(int)}. when  removing item that is less than 0
 	 */
 	@Test
-	void testRemoveIntIndexOutOfBoundsException() {
+	void testRemoveIntIndexOutOfBoundsExceptionLow() {
+
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#remove(int)}. when  removing item that is equal to size
+	 */
+	@Test
+	void testRemoveIntIndexOutOfBoundsExceptionEqual() {
+
+	}
+
+	/**
+	 * Test method for {@link utility.MyArrayList#remove(int)}. when  removing item that is greater than size
+	 */
+	@Test
+	void testRemoveIntIndexOutOfBoundsExceptionHigh() {
 
 	}
 
