@@ -534,7 +534,10 @@ class TestList
 	 */
 	@Test
 	void testSetFirst() {
-		fail("Not yet implemented");
+		list.add(integer3);
+		assertEquals(integer3, list.set(0, integer1));
+		assertEquals(integer1, list.get(0));
+		assertEquals(1, list.size());
 	}
 
 	/**
@@ -542,7 +545,12 @@ class TestList
 	 */
 	@Test
 	void testSetMiddle() {
-		fail("Not yet implemented");
+		list.add(integer3);
+		list.add(integer2);
+		list.add(integer1);
+		assertEquals(integer2, list.set(1, integer1));
+		assertEquals(integer1, list.get(1));
+		assertEquals(3, list.size());
 	}
 
 	/**
@@ -550,7 +558,12 @@ class TestList
 	 */
 	@Test
 	void testSetLast() {
-		fail("Not yet implemented");
+		list.add(integer3);
+		list.add(integer2);
+		list.add(integer1);
+		assertEquals(integer1, list.set(2, integer3));
+		assertEquals(integer3, list.get(2));
+		assertEquals(3, list.size());
 	}
 
 	/**
@@ -558,7 +571,8 @@ class TestList
 	 */
 	@Test
 	void testSetEmpty() {
-		fail("Not yet implemented");
+		assertEquals(null, list.set(0,integer1));
+		assertEquals(1,list.size());
 	}
 
 	/**
@@ -566,7 +580,17 @@ class TestList
 	 */
 	@Test
 	void testSetValueNullPointerException() {
-		fail("Not yet implemented");
+		list.add(integer1);
+		try
+		{
+			assertEquals(integer1,list.set(0,null));
+			assertEquals(1,list.size());
+			fail("NullPointerException was not caught when setting a null value");
+		}
+		catch (NullPointerException e)
+		{
+			assertTrue(true);
+		}
 	}
 
 	/**
@@ -574,7 +598,15 @@ class TestList
 	 */
 	@Test
 	void testSetIndexNullPointerException() {
-		fail("Not yet implemented");
+		list.add(integer2);
+		try {
+			assertEquals(null,list.set(Integer.parseInt(null),integer1));
+			fail("NullPointerException was not caught when setting a null index");
+		}
+		catch (NullPointerException e)
+		{
+			assertTrue(true);
+		}
 	}
 
 	/**
@@ -582,7 +614,16 @@ class TestList
 	 */
 	@Test
 	void testSetIndexOutOfBoundsExceptionLow() {
-		fail("Not yet implemented");
+		list.add(integer1);
+		try
+		{
+			assertEquals(integer1,list.set(-1,integer1));
+			fail("IndexOutOfBoundsException was not caught for a low value setting an index");
+		}
+		catch (IndexOutOfBoundsException e)
+		{
+			assertTrue(true);
+		}
 	}
 
 	/**
@@ -590,7 +631,16 @@ class TestList
 	 */
 	@Test
 	void testSetIndexOutOfBoundsExceptionHigh() {
-		fail("Not yet implemented");
+		list.add(integer1);
+		try
+		{
+			assertEquals(integer1,list.set(2,integer1));
+			fail("IndexOutOfBoundsException was not caught for a high value setting an index");
+		}
+		catch (IndexOutOfBoundsException e)
+		{
+			assertTrue(true);
+		}
 	}
 
 	/**
@@ -598,7 +648,16 @@ class TestList
 	 */
 	@Test
 	void testSetIndexOutOfBoundsExceptionEqual() {
-		fail("Not yet implemented");
+		list.add(integer1);
+		try
+		{
+			assertEquals(integer1,list.set(1,integer1));
+			fail("IndexOutOfBoundsException was not caught for a equal value setting an index");
+		}
+		catch (IndexOutOfBoundsException e)
+		{
+			assertTrue(true);
+		}
 	}
 
 	/**
