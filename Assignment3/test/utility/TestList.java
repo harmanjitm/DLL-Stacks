@@ -487,7 +487,7 @@ class TestList
 	@Test
 	void testRemoveNotEmpty() {
 		list.add(integer3);
-		assertEquals(integer1,list.remove(integer1));
+		assertEquals(null,list.remove(integer1));
 	}
 
 	/**
