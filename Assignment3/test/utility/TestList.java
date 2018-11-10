@@ -495,7 +495,9 @@ class TestList
 	 */
 	@Test
 	void testRemoveNotEmptyInList() {
-
+		list.add(integer1);
+		assertEquals(integer1,list.remove(integer1));
+		assertEquals(1,list.size());
 	}
 
 	/**
@@ -583,8 +585,7 @@ class TestList
 		list.add(integer1);
 		try
 		{
-			assertEquals(integer1,list.set(0,null));
-			assertEquals(1,list.size());
+			list.set(0,null);
 			fail("NullPointerException was not caught when setting a null value");
 		}
 		catch (NullPointerException e)
@@ -600,7 +601,7 @@ class TestList
 	void testSetIndexNullPointerException() {
 		list.add(integer2);
 		try {
-			assertEquals(null,list.set(Integer.parseInt(null),integer1));
+			list.set(Integer.parseInt(null),integer1);
 			fail("NullPointerException was not caught when setting a null index");
 		}
 		catch (NullPointerException e)
@@ -617,7 +618,7 @@ class TestList
 		list.add(integer1);
 		try
 		{
-			assertEquals(integer1,list.set(-1,integer1));
+			list.set(-1,integer1);
 			fail("IndexOutOfBoundsException was not caught for a low value setting an index");
 		}
 		catch (IndexOutOfBoundsException e)
@@ -634,7 +635,7 @@ class TestList
 		list.add(integer1);
 		try
 		{
-			assertEquals(integer1,list.set(2,integer1));
+			list.set(2,integer1);
 			fail("IndexOutOfBoundsException was not caught for a high value setting an index");
 		}
 		catch (IndexOutOfBoundsException e)
@@ -651,7 +652,7 @@ class TestList
 		list.add(integer1);
 		try
 		{
-			assertEquals(integer1,list.set(1,integer1));
+			list.set(1,integer1);
 			fail("IndexOutOfBoundsException was not caught for a equal value setting an index");
 		}
 		catch (IndexOutOfBoundsException e)
@@ -665,7 +666,8 @@ class TestList
 	 */
 	@Test
 	void testIsEmpty() {
-		fail("Not yet implemented");
+		assertTrue(list.isEmpty());
+		assertEquals(0,list.size());
 	}
 
 	/**
@@ -673,7 +675,9 @@ class TestList
 	 */
 	@Test
 	void testIsEmptyNotEmpty() {
-		fail("Not yet implemented");
+		list.add(integer1);
+		assertEquals(false,list.isEmpty());
+		assertEquals(1,list.size());
 	}
 
 	/**
@@ -681,7 +685,8 @@ class TestList
 	 */
 	@Test
 	void testContainsEmpty() {
-		fail("Not yet implemented");
+		assertEquals(0,list.size());
+		assertEquals(false,list.contains(integer1));
 	}
 
 	/**
@@ -689,7 +694,9 @@ class TestList
 	 */
 	@Test
 	void testContainsNotEmptyExists() {
-		fail("Not yet implemented");
+		list.add(integer1);
+		assertEquals(1,list.size());
+		assertEquals(true,list.contains(integer1));
 	}
 
 	/**
@@ -697,7 +704,16 @@ class TestList
 	 */
 	@Test
 	void testContainsNullPointerException() {
-		fail("Not yet implemented");
+		list.add(integer1);
+		try
+		{
+			list.contains(null);
+			fail("NullPointerException not caught for checking if list contains null value");
+		}
+		catch (NullPointerException e)
+		{
+			assertTrue(true);
+		}
 	}
 
 	/**
@@ -705,7 +721,9 @@ class TestList
 	 */
 	@Test
 	void testContainsNotEmptyNotExists() {
-		fail("Not yet implemented");
+		list.add(integer1);
+		assertEquals(1,list.size());
+		assertEquals(false,list.contains(integer2));
 	}
 
 	/**

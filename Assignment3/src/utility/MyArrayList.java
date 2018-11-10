@@ -21,19 +21,58 @@ public class MyArrayList<E> implements List<E>{
 
 	@Override
 	public void clear() {
-		array = null;
+		for (int i=0;i<size;i++)
+		{
+			array[i] = null;
+		}
 		size = 0;
 	}
 
 	@Override
 	public boolean add(int index, E toAdd) throws NullPointerException, IndexOutOfBoundsException {
-		// TODO Auto-generated method stub
-		return false;
+		array = (E[]) new Object[size+1];
+		E[] newArray = (E[]) new Object[size+1];
+		if(toAdd == null){
+			throw new NullPointerException();
+		}
+		else if(index < 0 || index >=size)
+		{
+			throw new IndexOutOfBoundsException();
+		}
+		else {
+			//if(index == 0)
+			//{
+			//	array[index] = toAdd;
+			//	return true;
+			//}
+
+			for (int i = size; i >= 0; i--) {
+				if (i == index) {
+					newArray[i] = toAdd;
+				} else {
+					newArray[i] = array[i];
+				}
+				System.out.println(newArray[i]);
+			}
+
+			for (int i = 0; i < size + 1; i++) {
+				array[i] = newArray[i];
+			}
+			size++;
+			return true;
+		}
 	}
 
 	@Override
 	public boolean add(E toAdd) throws NullPointerException, IndexOutOfBoundsException {
-
+		array = (E[]) new Object[size+1];
+		if(toAdd == null) {
+			throw new NullPointerException();
+		}
+		else {
+			array[size] = toAdd;
+			size++;
+		}
 		return false;
 	}
 
