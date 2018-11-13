@@ -1,5 +1,6 @@
 package utility;
 
+import java.lang.reflect.Array;
 import java.util.NoSuchElementException;
 
 public class MyArrayList<E> implements List<E>{
@@ -35,14 +36,19 @@ public class MyArrayList<E> implements List<E>{
 		if(toAdd == null){
 			throw new NullPointerException();
 		}
-		else if(index == 0)
+		else if(index == 0 && size == 0)
 		{
 			add(toAdd);
 			return true;
 		}
-		else if(index < 0 || index >=size)
+		else if(index < 0 || index >size)
 		{
 			throw new IndexOutOfBoundsException();
+		}
+		else if(index == size)
+		{
+			add(toAdd);
+			return true;
 		}
 		else {
 			for (int i = 0; i < index; i++) {
@@ -77,8 +83,7 @@ public class MyArrayList<E> implements List<E>{
 
 	@Override
 	public boolean addAll(List<? extends E> toAdd) throws NullPointerException {
-		E[] newArray = (E[]) new Object[toAdd.size()+array.length];
-
+		//int newSize = 0;
 		if(toAdd == null)
 		{
 			throw new NullPointerException();
@@ -91,19 +96,50 @@ public class MyArrayList<E> implements List<E>{
 				throw new NullPointerException();
 			}
 		}
-
-		for(int i=0;i<size;i++)
-		{
-			newArray[i] = array[i];
+		for(int i=0;i<toAdd.size();i++) {
+			add(toAdd.get(i));
 		}
+		//Problem 2
+//		int length = toAdd.size() + array.length;
+//		E[] newArray = (E[]) new Object[length];
+//
+//		for(int i=0;i<size;i++)
+//		{
+//			newArray[i] = array[i];
+//			newSize++;
+//		}
+//		int index = 0;
+//		for(int i=size;i<=toAdd.size();i++)
+//		{
+//			newArray[i] = toAdd.get(index);
+//			index++;
+//			newSize++;
+// 		}
+//
+//		size = newSize;
+//		array = newArray;
 
-		for(int i=0;i<toAdd.size();i++)
-		{
-			newArray[size+i] = toAdd.get(i);
-			size++;
-		}
+		//Problem 1
+//		int index = 0;
+//		for(int i=size;i<toAdd.size();i++)
+//		{
+//			array[i] = toAdd.get(index);
+//			index++;
+//			size++;
+//		}
 
-		array = newArray;
+//		for(int i=0;i<size;i++)
+//		{
+//			newArray[i] = array[i];
+//		}
+//
+//		for(int i=0;i<toAdd.size();i++)
+//		{
+//			newArray[size+i] = toAdd.get(i);
+//			size++;
+//		}
+//
+//		array = newArray;
 		return true;
 	}
 
@@ -127,19 +163,6 @@ public class MyArrayList<E> implements List<E>{
 		{
 			throw new IndexOutOfBoundsException();
 		}
-//		E[] newArray = (E[]) new Object[size];
-//		toReturn = array[index];
-//		array[index] = null;
-//
-//		for(int i=0;i<size;i++)
-//		{
-//			if(array[i] != null)
-//			{
-//				newArray[i] = array[i];
-//			}
-//		}
-//		array = newArray;
-
 		for(int i=0;i<size;i++)
 		{
 			if(i == index)
@@ -181,8 +204,20 @@ public class MyArrayList<E> implements List<E>{
 
 	@Override
 	public E set(int index, E toChange) throws NullPointerException, IndexOutOfBoundsException {
-		// TODO Auto-generated method stub
-		return null;
+		if(toChange == null)
+		{
+			throw new NullPointerException();
+		}
+		else if(index <0 || index >=size)
+		{
+			throw new IndexOutOfBoundsException();
+		}
+		else
+		{
+			E previous = array[index];
+			array[index] = toChange;
+			return previous;
+		}
 	}
 
 	@Override
@@ -211,38 +246,56 @@ public class MyArrayList<E> implements List<E>{
 	}
 
 	@Override
-	public E[] toArray(E[] toHold) throws NullPointerException {
-		// TODO Auto-generated method stub
-		return null;
+	public E[] toArray(E[] toHold) throws NullPointerException
+	{
+		if(toHold == null)
+		{
+			throw new NullPointerException("Cannot copy to a null array.");
+		}
+
+		if (toHold.length < size)
+		{
+			toHold = (E[]) (Array.newInstance(toHold.getClass().getComponentType(), size));
+		}
+
+		for (int i = 0; i < size; i++)
+		{
+			toHold[i] = (E) array[i];
+		}
+
+		return toHold;
 	}
 
 	@Override
 	public E[] toArray() {
-		// TODO Auto-generated method stub
-		return null;
+		@SuppressWarnings("unchecked")
+		E[] toReturn = (E[])(Array.newInstance(Object.class, size));
+		System.arraycopy(array, 0, toReturn, 0, size());
+		return toReturn;
 	}
 
 	@Override
 	public Iterator<E> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ArrayBasedIterator();
 	}
 
-	@SuppressWarnings("unused")
 	private class ArrayBasedIterator implements Iterator<E>
 	{
-		private int pos;
+		//Attributes
+		private int 		pos;
 
 		@Override
-		public boolean hasNext() {
+		public boolean hasNext()
+		{
 			return pos < size;
 		}
 
 		@Override
-		public E next() throws NoSuchElementException {
+		public E next() throws NoSuchElementException
+		{
 			try
 			{
-				E toReturn = array[pos];
+				E toReturn = (E) array[pos];
 				pos++;
 				return toReturn;
 			}
@@ -251,6 +304,5 @@ public class MyArrayList<E> implements List<E>{
 				throw new NoSuchElementException();
 			}
 		}
-
 	}
 }

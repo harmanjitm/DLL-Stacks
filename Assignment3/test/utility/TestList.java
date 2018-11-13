@@ -245,7 +245,7 @@ class TestList
 		testList.add(integer2);
 		testList.add(integer3);
 		assertEquals(1,list.size());
-		assertEquals(1,testList.size());
+		assertEquals(2,testList.size());
 		assertTrue(list.addAll(testList));
 		assertEquals(integer3,list.get(2));
 	}
@@ -383,8 +383,14 @@ class TestList
 	 */
 	@Test
 	void testRemoveIntEmpty() {
-		assertEquals(null,list.remove(0));
 		assertEquals(0,list.size());
+		try{
+			list.remove(0);
+		}
+		catch (IndexOutOfBoundsException e)
+		{
+			assertTrue(true);
+		}
 	}
 
 	/**
@@ -495,9 +501,9 @@ class TestList
 	 */
 	@Test
 	void testRemoveNotEmptyInList() {
-		list.add(integer1);
-		assertEquals(integer1,list.remove(integer1));
-		assertEquals(1,list.size());
+		list.add(integer1);//size becomes 1
+		assertEquals(integer1,list.remove(integer1));//size decreases
+		assertEquals(0,list.size());//size becomes 0
 	}
 
 	/**
@@ -573,8 +579,15 @@ class TestList
 	 */
 	@Test
 	void testSetEmpty() {
-		assertEquals(null, list.set(0,integer1));
-		assertEquals(1,list.size());
+		assertEquals(0,list.size());
+		try{
+			list.set(0,integer1);
+			fail("IndexOutOfBoundsException not caught when setting index of 0 in empty list.");
+		}
+		catch (IndexOutOfBoundsException e)
+		{
+			assertTrue(true);
+		}
 	}
 
 	/**
@@ -587,22 +600,6 @@ class TestList
 		{
 			list.set(0,null);
 			fail("NullPointerException was not caught when setting a null value");
-		}
-		catch (NullPointerException e)
-		{
-			assertTrue(true);
-		}
-	}
-
-	/**
-	 * Test method for {@link utility.MyArrayList#set(int, java.lang.Object)}.when setting a null index
-	 */
-	@Test
-	void testSetIndexNullPointerException() {
-		list.add(integer2);
-		try {
-			list.set(Integer.parseInt(null),integer1);
-			fail("NullPointerException was not caught when setting a null index");
 		}
 		catch (NullPointerException e)
 		{
@@ -725,69 +722,4 @@ class TestList
 		assertEquals(1,list.size());
 		assertEquals(false,list.contains(integer2));
 	}
-
-	/**
-	 * Test method for ToArray. when the specified array is empty
-	 */
-	@Test
-	void testToArrayArrayEmpty() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for ToArray. when specified array is not empty
-	 */
-	@Test
-	void testToArrayArrayNotEmpty() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for ToArray. when specified array is null
-	 */
-	@Test
-	void testToArrayArrayNullPointerException() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for ToArray. when the total size is greater than max size of initial array
-	 */
-	@Test
-	void testToArrayArraySizeTooBig() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link utility.MyArrayList#toArray()}. when the list is empty
-	 */
-	@Test
-	void testToArrayEmpty() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link utility.MyArrayList#toArray()}. when the list is not empty
-	 */
-	@Test
-	void testToArrayNotEmpty() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link utility.MyArrayList#iterator()}. when list is empty
-	 */
-	@Test
-	void testIteratorEmpty() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link utility.MyArrayList#iterator()}. when list is not empty
-	 */
-	@Test
-	void testIteratorNotEmpty() {
-		fail("Not yet implemented");
-	}
-
 }
