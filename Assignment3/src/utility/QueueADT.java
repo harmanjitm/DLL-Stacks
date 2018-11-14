@@ -13,7 +13,7 @@ import java.io.Serializable;
  * @author Harmanjit M.
  * @version 1.0
  *
- * @param <E> The type of elements this list holds.
+ * @param <E> The type of elements this Queue holds.
  */
 public interface QueueADT<E> extends Serializable
 {
