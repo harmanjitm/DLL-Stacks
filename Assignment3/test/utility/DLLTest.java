@@ -291,7 +291,15 @@ class DLLTest
     @Test
     void testGetEmpty() {
         assertEquals(0,list.size());
-        assertEquals(null,list.get(0));
+        try
+        {
+            list.get(0);
+            fail("IndexOutOfBoundsException was not caught for getting an empty list");
+        }
+        catch (IndexOutOfBoundsException e)
+        {
+            assertTrue(true);
+        }
     }
 
     /**

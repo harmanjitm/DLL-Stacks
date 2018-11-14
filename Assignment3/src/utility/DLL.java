@@ -1,5 +1,7 @@
 package utility;
 
+import java.util.NoSuchElementException;
+
 public class DLL<E> implements List<E>{
 
     private DLLNode head;
@@ -14,6 +16,8 @@ public class DLL<E> implements List<E>{
     @Override
     public void clear() {
         head = null;
+        tail = null;
+        size = 0;
     }
 
     @Override
@@ -22,14 +26,43 @@ public class DLL<E> implements List<E>{
         {
             throw new NullPointerException();
         }
-        else if(index < 0 || index >= size)
+        else if(index < 0 || index > size)
         {
             throw new IndexOutOfBoundsException();
         }
+        else if(index == 0 && size == 0)
+        {
+            add(toAdd);
+            return true;
+        }
+        else if(index == 0)
+        {
+            DLLNode node = new DLLNode(toAdd);
+            node.next = head.next;
+            node.prev = null;
+            head = node;
+            size++;
+            return true;
+        }
+        else if(index == size)
+        {
+            add(toAdd);
+            return true;
+        }
 
-
-
-        return false;
+        DLLNode node = new DLLNode(toAdd);
+        DLLNode current = head;
+        for(int i=0;i<index;i++)
+        {
+            current = current.next;
+        }
+        DLLNode prev = current.prev;
+        prev.next = node;
+        node.prev = prev;
+        node.next = current;
+        current.prev = node;
+        size++;
+        return true;
     }
 
     @Override
@@ -38,64 +71,197 @@ public class DLL<E> implements List<E>{
         {
             throw new NullPointerException();
         }
-
-        DLLNode node = new DLLNode(toAdd);
-        DLLNode last = head;
-
-        node.next = null;
-
         if(head == null)
         {
+            DLLNode node =  new DLLNode(toAdd);
+            tail = node;
             node.prev = null;
             head = node;
+            size++;
+            return true;
+        }
+        else
+        {
+            DLLNode node = new DLLNode(toAdd);
+            DLLNode temp = head;
+            while(temp.next != null)
+            {
+                temp = temp.next;
+            }
+            temp.next = node;
+            node.prev = temp;
             tail = node;
             size++;
             return true;
         }
-
-        while (last.next != null) {
-            last = last.next; you must be desperate to come and ask me a question
-            last.next = node;
-            node.prev = last;
-        }
-
-        if(head)
-        return false;
     }
 
     @Override
     public boolean addAll(List<? extends E> toAdd) throws NullPointerException {
-        return false;
+        for(int i=0;i<toAdd.size();i++)
+        {
+            if(toAdd.get(i) == null)
+            {
+                throw new NullPointerException();
+            }
+        }
+        if(tail == null && toAdd.size() != 0)
+        {
+            DLLNode node = new DLLNode(toAdd.get(0));
+            head = node;
+            tail = node;
+            size++;
+            for(int i=1;i<toAdd.size();i++)
+            {
+                DLLNode newNode = new DLLNode(toAdd.get(i));
+                tail.next = newNode;
+                newNode.next = null;
+                newNode.prev = tail;
+                tail = newNode;
+                size++;
+            }
+            return true;
+        }
+        else
+        {
+            for(int i=0;i<toAdd.size();i++)
+            {
+                DLLNode newNode = new DLLNode(toAdd.get(i));
+                tail.next = newNode;
+                newNode.next = null;
+                newNode.prev = tail;
+                tail = newNode;
+                size++;
+            }
+            return true;
+        }
     }
 
     @Override
     public E get(int index) throws IndexOutOfBoundsException {
-        return null;
+        if(index < 0 || index >= size)
+        {
+            throw new IndexOutOfBoundsException();
+        }
+        DLLNode current = head;
+        for(int i=0;i<index;i++)
+        {
+            current = current.next;
+        }
+        return (E) current.value;
     }
 
     @Override
     public E remove(int index) throws IndexOutOfBoundsException {
-        return null;
+        if(index < 0 || index >= size)
+        {
+            throw new IndexOutOfBoundsException();
+        }
+        else if (index == 0)
+        {
+            E toReturn = (E) head.value;
+            head = head.next;
+            head.prev = null;
+            size--;
+            return toReturn;
+        }
+        else if(index == size-1)
+        {
+            E toReturn = (E) tail.value;
+            tail = tail.prev;
+            tail.next = null;
+            size--;
+            return toReturn;
+        }
+        else {
+            E toReturn;
+            DLLNode current = head;
+            for (int i = 0; i < index; i++) {
+                current = current.next;
+            }
+            toReturn = (E) current.value;
+            DLLNode prev = current.prev;
+            DLLNode next = current.next;
+            prev.next = current.next;
+            next.prev = prev;
+            size--;
+            return toReturn;
+        }
     }
 
     @Override
     public E remove(E toRemove) throws NullPointerException {
+        if(toRemove == null)
+        {
+            throw new NullPointerException();
+        }
+        DLLNode current = head;
+        while(current != null && !current.value.equals(toRemove))
+        {
+            current = current.next;
+        }
+        if(current!=null)
+        {
+            if(current.prev != null)
+            {
+                current.prev.next = current.next;
+            }
+            else
+            {
+                head = current.next;
+            }
+            if(current.next != null)
+            {
+                current.next.prev = current.prev;
+            }
+            else
+            {
+                tail = current.prev;
+            }
+            size--;
+            return (E) current.value;
+        }
         return null;
     }
 
     @Override
     public E set(int index, E toChange) throws NullPointerException, IndexOutOfBoundsException {
-        return null;
+        if(toChange == null)
+        {
+            throw new NullPointerException();
+        }
+        if(index < 0 || index >= size)
+        {
+            throw new IndexOutOfBoundsException();
+        }
+        DLLNode current = head;
+        while(index>0)
+        {
+            current = current.next;
+            index--;
+        }
+        E toReturn = (E) current.value;
+        current.value = toChange;
+        return toReturn;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return size == 0;
     }
 
     @Override
     public boolean contains(E toFind) throws NullPointerException {
-        return false;
+        if(toFind == null)
+        {
+            throw new NullPointerException();
+        }
+        DLLNode current = head;
+        while ((current != null) && (!current.value.equals(toFind)))
+        {
+            current = current.next;
+        }
+        return current != null;
     }
 
     @Override
@@ -105,11 +271,52 @@ public class DLL<E> implements List<E>{
 
     @Override
     public E[] toArray() {
-        return null;
+        E[] array = (E[]) new Object[size];
+        DLLNode current = head;
+        int count = 0;
+        while(!current.value.equals(tail.value))
+        {
+            array[count] = (E) current.value;
+            count++;
+            current = current.next;
+        }
+        return array;
     }
 
     @Override
     public Iterator<E> iterator() {
-        return null;
+        return new DLLIterator();
+    }
+
+    private class DLLIterator implements Iterator<E>
+    {
+        //Attributes
+        private DLLNode current = head;
+
+        @Override
+        public boolean hasNext()
+        {
+            return current != null;
+        }
+
+        @Override
+        public E next() throws NoSuchElementException
+        {
+            try
+            {
+                if(!hasNext()) throw new NoSuchElementException();
+                E toReturn = (E) current.value;
+                current = current.next;
+                if(toReturn == null)
+                {
+                    throw new NoSuchElementException();
+                }
+                return toReturn;
+            }
+            catch(IndexOutOfBoundsException e)
+            {
+                throw new NoSuchElementException();
+            }
+        }
     }
 }
