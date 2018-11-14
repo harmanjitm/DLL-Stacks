@@ -297,6 +297,10 @@ public class MyArrayList<E> implements List<E>{
 			{
 				E toReturn = (E) array[pos];
 				pos++;
+				if(toReturn == null)
+				{
+					throw new NoSuchElementException();
+				}
 				return toReturn;
 			}
 			catch(IndexOutOfBoundsException e)

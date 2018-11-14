@@ -3,6 +3,8 @@ package utility;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.NoSuchElementException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -17,7 +19,7 @@ class TestList
 	private Integer integer1 = 1;
 	private Integer integer2 = 2;
 	private Integer integer3 = 3;
-	
+
 	/**
 	 */
 	@BeforeEach
@@ -30,16 +32,16 @@ class TestList
 	 * Test method for {@link utility.MyArrayList#size()} when the list is empty.
 	 */
 	@Test
-	void testSizeEmpty() 
+	void testSizeEmpty()
 	{
 		assertEquals(0, list.size());
 	}
-	
+
 	/**
 	 * Test method for {@link utility.MyArrayList#size()} when the list is not empty.
 	 */
 	@Test
-	void testSizeNotEmpty() 
+	void testSizeNotEmpty()
 	{
 		list.add(integer1);
 		assertEquals(1, list.size());
@@ -66,30 +68,30 @@ class TestList
 		list.clear();
 		assertEquals(0, list.size());
 	}
-	
+
 	/**
 	 * Test method for {@link utility.MyArrayList#add(int, java.lang.Object)} when the list is empty.
 	 */
 	@Test
-	void testAddIntEmpty() 
+	void testAddIntEmpty()
 	{
 		assertTrue(list.add(0, integer1));
 		assertEquals(1, list.size());
 		assertEquals(integer1, list.get(0));
 	}
-	
+
 	/**
 	 * Test method for {@link utility.MyArrayList#add(int, java.lang.Object)} when the list not is empty.
 	 */
 	@Test
-	void testAddIntNotEmptyBeginning() 
+	void testAddIntNotEmptyBeginning()
 	{
 		list.add(integer2);
 		assertTrue(list.add(0, integer1));
 		assertEquals(2, list.size());
 		assertEquals(integer1, list.get(0));
 	}
-	
+
 	/**
 	 * Test method for {@link utility.MyArrayList#add(int, java.lang.Object)} when the list not is empty.
 	 */
@@ -102,12 +104,12 @@ class TestList
 		assertEquals(3, list.size());
 		assertEquals(integer2, list.get(1));
 	}
-	
+
 	/**
 	 * Test method for {@link utility.MyArrayList#add(int, java.lang.Object)} when the list not is empty.
 	 */
 	@Test
-	void testAddIntNotEmptyEnd() 
+	void testAddIntNotEmptyEnd()
 	{
 		list.add(integer1);
 		list.add(integer2);
@@ -120,7 +122,7 @@ class TestList
 	 * Test method for {@link utility.MyArrayList#add(int, java.lang.Object)} for IndexOutOfBoundsException.
 	 */
 	@Test
-	void testAddIntIndexOutOfBoundsLow() 
+	void testAddIntIndexOutOfBoundsLow()
 	{
 		try
 		{
@@ -721,5 +723,37 @@ class TestList
 		list.add(integer1);
 		assertEquals(1,list.size());
 		assertEquals(false,list.contains(integer2));
+	}
+
+	@Test
+	void testIteratorNotEmpty()
+	{
+		list.add(integer1);
+		list.add(integer2);
+		list.add(integer3);
+		Iterator it = list.iterator();
+		assertTrue(it.hasNext());
+		int i=0;
+		while (it.hasNext())
+		{
+			assertEquals(list.get(i),it.next());
+			i++;
+		}
+		assertEquals(list.size(), i);
+	}
+
+	@Test
+	void testIteratorNoSuchElementException()
+	{
+		try
+		{
+			Iterator<Integer> it = list.iterator();
+			it.next();
+			fail("NoSuchElementException was not caught");
+		}
+		catch (NoSuchElementException e)
+		{
+			assertTrue(true);
+		}
 	}
 }
