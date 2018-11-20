@@ -1,87 +1,115 @@
 package utility;
 
+import exceptions.EmptyQueueException;
+
 import java.io.Serializable;
 
 /**
- * This interface is designed to be used to implement a Queue
- * using this ADT. Implementation of this will require all the methods
- * below to be implemented with correct functionality.
- *
- * The Queue works on a FIFO (First In First Out) basis.
- * Whatever element added first will be removed first.
- *
- * @author Harmanjit M.
- * @version 1.0
- *
- * @param <E> The type of elements this Queue holds.
+ * This is the professional Queue Interface for Advanced Object 
+ * Oriented Programming (CRPG 311) at SAIT Polytechnic.
+ * This Queue embodies all the standard Queue operations, 
+ * and includes several helper methods that will 
+ * give the data structure more flexibility and use.
+ * 
+ * Created On: June 4, 2004
+ * Updated On: Dec. 3, 2010
+ * Updated On: Nov 15, 2018 by kitty
+ * 
+ * Queue.java
+ * @author Don Heninger & Dave Watson
  */
 public interface QueueADT<E> extends Serializable
 {
-    /**
-     * Method to check the total number of elements in the Queue
-     * and return them as an Integer.
-     *
-     * Pre-Conditions: The list cannot have any null values.
-     * Post-Conditions: The size returned cannot be a negative value.
-     *
-     * @return The total number of elements in the Queue
-     */
-    public int size();
+	/**
+	 * Enqueue will place the added item at the last position in the
+	 * queue.  This method will not allow <code>null</code> values
+	 * to be added to the Queue.
+	 * 
+	 * @param toAdd the item to be added to the Queue.
+	 * @throws NullPointerException raised when a <code>null</code> object
+	 * is placed in the Queue.
+	 */
+	public void enqueue( E toAdd ) throws NullPointerException;
+	
+	/**
+	 * Dequeue will remove the first item that was placed in the Queue.
+	 * @return the first item in the Queue.
+	 * @throws EmptyQueueException raised when the queue's length is zero (0).
+	 */
+	public E dequeue() throws EmptyQueueException;
+	
+	/**
+	 * Peek provides a reference to the first item in the queue without
+	 * removing from the queue.
+	 * 
+	 * @return the first item in the queue.
+	 * @throws EmptyQueueException raised when the queue's length is zero (0).
+	 */
+	public E peek() throws EmptyQueueException;
+	
+	/**
+	 * dequeueAll removes all items in the queue.
+	 */
+	public void dequeueAll();
+	
+	/**
+	 * Returns <code>true</code> when the queue contains no items.
+	 * @return <code>true</code> when queue length is zero (0).
+	 */
+	public boolean isEmpty();
+	
+	/**
+	 * Returns an iterator over the elements in this queue in proper sequence.
+	 * 
+	 * @return an iterator over the elements in this queue in proper sequence.
+	 */
+	public Iterator<E> iterator();
+	
+	/**
+	 * Used to compare two Queue ADT's. To be equal two queues must contain
+	 * equal items appearing in the same order.
+	 * 
+	 * @param that the Queue ADT to be compared to this queue.
+	 * @return <code>true</code> if the queues are equal.
+	 */
+	public boolean equals( QueueADT<E> that );
+	
+	/**
+	 * Returns an array containing all of the elements in this list in proper
+	 * sequence. Obeys the general contract of the Collection.toArray method.
+	 * 
+	 * @return an array containing all of the elements in this list in proper
+	 *         sequence.
+	 */
+	public Object[] toArray();
 
-    /**
-     * Method to return the element on top of the Queue.
-     * The value being returned is the one which was added first.
-     *
-     * Pre-Conditions: The queue must have at least one element to return.
-     * Post-Conditions: The value returned must be the very first value in the Queue.
-     *
-     * @return The value from the top of the Queue.
-     * @throws NullPointerException When the value being returned is NULL
-     */
-    public E deQueue() throws NullPointerException;
-
-    /**
-     * Method to add an element to the end of the Queue.
-     * The value being added will be added to the very end,
-     * and will be removed last.
-     *
-     * Pre-Conditions: The value being entered cannot be null, however
-     * the implementation must catch it. The element being added can be of any type.
-     * Post-Conditions: The value being returned must be true to ensure
-     * that the element was added successfully to the Queue, and it
-     * should be the last element in the Queue.
-     *
-     * @param toQueue The element to add to the Queue
-     * @return Return true or false, depending on if the element was
-     * added successfully to the Queue.
-     * @throws NullPointerException When the value being added is being entered as NULL
-     */
-    public boolean enQueue(E toQueue) throws NullPointerException;
-
-    /**
-     * Method to check which element is on top of the Queue, without removing,
-     * or making any changes to it.
-     *
-     * Pre-Conditions: The Queue must have at least one element in order to be returned.
-     * Post-Conditions: The returned value must be the very first element in the Queue,
-     * and cannot be a NULL value.
-     *
-     * @return Return the first value on the Queue.
-     * @throws NullPointerException When the first element on the Queue is NULL
-     * or when the Queue is empty with no elements.
-     */
-    public E peek() throws NullPointerException;
-
-    /**
-     * Method to check if the Queue is empty or not and return a value.
-     *
-     * Pre-Conditions: The Queue can be either empty, or non-empty.
-     * Post-Conditions: The value returned must be based on checking the
-     * size of the Queue.
-     *
-     * @return Return true or false based on if the Queue is empty or not.
-     * If the size == 0 then return true, else return false.
-     */
-    public boolean isEmpty();
-
+	/**
+	 * Returns an array containing all of the elements in this list in proper
+	 * sequence; the runtime type of the returned array is that of the specified
+	 * array. Obeys the general contract of the Collection.toArray(Object[])
+	 * method.
+	 * 
+	 * @param holder
+	 *            the array into which the elements of this queue are to be
+	 *            stored, if it is big enough; otherwise, a new array of the
+	 *            same runtime type is allocated for this purpose.
+	 * @return an array containing the elements of this queue.
+	 * @throws NullPointerException
+	 *          if the specified array is null.
+	 */
+	public E[] toArray( E[] holder ) throws NullPointerException;
+	
+	/**
+	 * (Optional Method) Returns true if the number of items in the queue
+	 * equals the length.  This operation is only implement when a fixed length
+	 * queue is required.
+	 * @return <code>true</code> if queue is at capacity.
+	 */
+	public boolean isFull();
+	
+	/**
+	 * Returns the length of the current queue as an integer value.
+	 * @return the current size to the queue as an integer.
+	 */
+	public int size();
 }
