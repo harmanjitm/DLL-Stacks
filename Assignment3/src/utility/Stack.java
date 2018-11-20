@@ -1,13 +1,15 @@
 package utility;
 
-public class Stack<E> implements MyStackADT<E> {
+import java.util.EmptyStackException;
+
+public class Stack<E> implements StackADT<E> {
 
     int max = 1000;
     int top = 0;
     E[] array;
 
     public Stack() {
-        array = (E[]) new Object[max];
+        //TODO make this user MyArrayList List instead array = (E[]) new Object[max];
     }
 
     /**
@@ -23,7 +25,7 @@ public class Stack<E> implements MyStackADT<E> {
      *                              or when the Stack is empty with no elements.
      */
     @Override
-    public E peek() throws NullPointerException {
+    public E peek() throws EmptyStackException {
         if(top == 0)
         {
             return null;
@@ -38,6 +40,15 @@ public class Stack<E> implements MyStackADT<E> {
     }
 
     /**
+     * Clears all the items from this Stack. This method returns, unless there
+     * is an Exception (Runtime) thrown.
+     */
+    @Override
+    public void clear() {
+
+    }
+
+    /**
      * Method to remove and return the element from the very top of the Stack.
      * <p>
      * Pre-Conditions: The Stack cannot be empty, and must contain at least one element.
@@ -47,7 +58,7 @@ public class Stack<E> implements MyStackADT<E> {
      * @throws NullPointerException When the element on the top of the Stack is NULL.
      */
     @Override
-    public E pop() throws NullPointerException {
+    public E pop() throws EmptyStackException {
         if(array[top] == null)
         {
             throw new NullPointerException();
@@ -70,13 +81,12 @@ public class Stack<E> implements MyStackADT<E> {
      *                              initialized properly.
      */
     @Override
-    public boolean push(E toPush) throws NullPointerException {
+    public void push(E toPush) throws NullPointerException {
         if (toPush == null) {
             throw new NullPointerException();
         }
         top++;
         array[top] = toPush;
-        return true;
     }
 
     /**
@@ -95,19 +105,60 @@ public class Stack<E> implements MyStackADT<E> {
     }
 
     /**
-     * Method to find the specified element in the Stack to check if it exists.
-     * <p>
-     * Pre-Conditions: The specified element must not be NULL.
-     * Post-Conditions: The index being returned cannot be a negative Integer and
-     * must be less than the total size of the Stack.
+     * Returns an array containing all of the elements in this list in proper
+     * sequence. Obeys the general contract of the Collection.toArray method.
      *
-     * @param toFind The element to search for in the Stack.
-     * @return Returns the index of the item found in the Stack, and the position
-     * of the element in the Stack.
-     * @throws NullPointerException When the item found is NULL.
+     * @return an array containing all of the elements in this list in proper
+     * sequence.
      */
     @Override
-    public int find(E toFind) throws NullPointerException {
+    public Object[] toArray() {
+        return new Object[0];
+    }
+
+    /**
+     * Returns an array containing all of the elements in this list in proper
+     * sequence; the runtime type of the returned array is that of the specified
+     * array. Obeys the general contract of the Collection.toArray(Object[])
+     * method.
+     *
+     * @param holder@return an array containing the elements of this stack.
+     * @throws NullPointerException if the specified array is null.
+     */
+    @Override
+    public E[] toArray(E[] holder) throws NullPointerException {
+        return null;
+    }
+
+    /**
+     * Returns true if this list contains the specified element. More formally,
+     * returns true if and only if this list contains at least one element e
+     * such that (o==null ? e==null : o.equals(e)).
+     *
+     * @param toFind element whose presence in this list is to be tested.
+     * @return true if this list contains the specified element.
+     * @throws NullPointerException if the specified element is null and this list does not
+     *                              support null elements.
+     */
+    @Override
+    public boolean contains(E toFind) throws NullPointerException {
+        return false;
+    }
+
+    /**
+     * Returns the 1-based position where an object is on this stack. If the
+     * object o occurs as an item in this stack, this method returns the
+     * distance from the top of the stack of the occurrence nearest the top of
+     * the stack; the topmost item on the stack is considered to be at distance
+     * 1. The equals method is used to compare o to the items in this stack.
+     *
+     * @param toFind the desired object.
+     * @return the 1-based position from the top of the stack where the object
+     * is located; the return value -1 indicates that the object is not
+     * on the stack.
+     */
+    @Override
+    public int search(E toFind) {
         for(int i = top;i<=array.length;i++)
         {
             if(array[i] == toFind)
@@ -119,6 +170,39 @@ public class Stack<E> implements MyStackADT<E> {
                 throw new NullPointerException();
             }
         }
+        return -1;
+    }
+
+    /**
+     * Returns an iterator over the elements in this stack in proper sequence.
+     *
+     * @return an iterator over the elements in this stack in proper sequence.
+     */
+    @Override
+    public Iterator<E> iterator() {
+        return null;
+    }
+
+    /**
+     * Used to compare two Stack ADT's. To be equal two stacks must contain
+     * equal items appearing in the same order.
+     *
+     * @param that the Stack ADT to be compared to this stack.
+     * @return <code>true</code> if the stacks are equal.
+     */
+    @Override
+    public boolean equals(StackADT<E> that) {
+        return false;
+    }
+
+    /**
+     * Returns the depth of the current stack as an integer value.
+     *
+     * @return the current size to the stack as an integer.
+     */
+    @Override
+    public int size() {
         return 0;
     }
+
 }

@@ -77,7 +77,7 @@ public interface StackADT<E> extends Serializable
 	 * array. Obeys the general contract of the Collection.toArray(Object[])
 	 * method.
 	 * 
-	 * @param toHold
+	 * @param holder
 	 *            the array into which the elements of this stack are to be
 	 *            stored, if it is big enough; otherwise, a new array of the
 	 *            same runtime type is allocated for this purpose.
