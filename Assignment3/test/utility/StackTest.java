@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.EmptyStackException;
 
-import static junit.framework.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 
 class StackTest {
@@ -180,7 +182,7 @@ class StackTest {
     void searchNotEmptyContains() {
         stack.push(integer1);
         stack.push(integer2);
-        assertEquals(0, stack.search(integer1));
+        assertEquals(1, stack.search(integer1));
     }
 
     @Test

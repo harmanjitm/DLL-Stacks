@@ -4,12 +4,10 @@ import java.util.EmptyStackException;
 
 public class Stack<E> implements StackADT<E> {
 
-    int max = 1000;
-    int top = 0;
-    E[] array;
+    MyArrayList<E> stack;
 
     public Stack() {
-        //TODO make this user MyArrayList List instead array = (E[]) new Object[max];
+        stack = new MyArrayList<>();
     }
 
     /**
@@ -26,17 +24,11 @@ public class Stack<E> implements StackADT<E> {
      */
     @Override
     public E peek() throws EmptyStackException {
-        if(top == 0)
+        if(stack.get(0) == null || stack.size() == 0)
         {
-            return null;
+            throw new EmptyStackException();
         }
-        else if(array[top] == null)
-        {
-            throw new NullPointerException();
-        }
-        else {
-            return array[top];
-        }
+        return stack.get(0);
     }
 
     /**
@@ -45,7 +37,7 @@ public class Stack<E> implements StackADT<E> {
      */
     @Override
     public void clear() {
-
+        stack.clear();
     }
 
     /**
@@ -59,12 +51,13 @@ public class Stack<E> implements StackADT<E> {
      */
     @Override
     public E pop() throws EmptyStackException {
-        if(array[top] == null)
+        if(stack.get(0) == null || stack.size() == 0)
         {
-            throw new NullPointerException();
+            throw new EmptyStackException();
         }
-        top--;
-        return array[top];
+        E toReturn = stack.get(0);
+        stack.remove(0);
+        return toReturn;
     }
 
     /**
@@ -82,11 +75,11 @@ public class Stack<E> implements StackADT<E> {
      */
     @Override
     public void push(E toPush) throws NullPointerException {
-        if (toPush == null) {
+        if(toPush == null)
+        {
             throw new NullPointerException();
         }
-        top++;
-        array[top] = toPush;
+        stack.add(0,toPush);
     }
 
     /**
@@ -101,7 +94,7 @@ public class Stack<E> implements StackADT<E> {
      */
     @Override
     public boolean isEmpty() {
-        return peek() == null;
+        return stack.size() == 0;
     }
 
     /**
@@ -113,7 +106,7 @@ public class Stack<E> implements StackADT<E> {
      */
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        return stack.toArray();
     }
 
     /**
@@ -127,7 +120,19 @@ public class Stack<E> implements StackADT<E> {
      */
     @Override
     public E[] toArray(E[] holder) throws NullPointerException {
-        return null;
+        if(holder == null)
+        {
+            throw new NullPointerException();
+        }
+
+        for(int i=0;i<holder.length;i++)
+        {
+            if(holder[i] == null)
+            {
+                throw new NullPointerException();
+            }
+        }
+        return stack.toArray(holder);
     }
 
     /**
@@ -142,7 +147,11 @@ public class Stack<E> implements StackADT<E> {
      */
     @Override
     public boolean contains(E toFind) throws NullPointerException {
-        return false;
+        if(toFind == null)
+        {
+            throw new NullPointerException();
+        }
+        return stack.contains(toFind);
     }
 
     /**
@@ -159,15 +168,11 @@ public class Stack<E> implements StackADT<E> {
      */
     @Override
     public int search(E toFind) {
-        for(int i = top;i<=array.length;i++)
+        for(int i=0;i<stack.size();i++)
         {
-            if(array[i] == toFind)
+            if(stack.get(i).equals(toFind))
             {
                 return i;
-            }
-            else if(toFind == null)
-            {
-                throw new NullPointerException();
             }
         }
         return -1;
@@ -180,7 +185,7 @@ public class Stack<E> implements StackADT<E> {
      */
     @Override
     public Iterator<E> iterator() {
-        return null;
+        return stack.iterator();
     }
 
     /**
@@ -192,7 +197,22 @@ public class Stack<E> implements StackADT<E> {
      */
     @Override
     public boolean equals(StackADT<E> that) {
-        return false;
+        boolean toReturn = false;
+        System.out.println("uhh1");
+//        while (stack.iterator().hasNext())
+//        {
+//            System.out.println("uhh2");
+//            if()
+//            {
+//                System.out.println("uhh3");
+//                toReturn = true;
+//            }
+//            else
+//            {
+//                return false;
+//            }
+//        }
+        return toReturn;
     }
 
     /**
@@ -202,7 +222,7 @@ public class Stack<E> implements StackADT<E> {
      */
     @Override
     public int size() {
-        return 0;
+        return stack.size();
     }
 
 }
