@@ -197,22 +197,14 @@ public class Stack<E> implements StackADT<E> {
      */
     @Override
     public boolean equals(StackADT<E> that) {
-        boolean toReturn = false;
-        System.out.println("uhh1");
-//        while (stack.iterator().hasNext())
-//        {
-//            System.out.println("uhh2");
-//            if()
-//            {
-//                System.out.println("uhh3");
-//                toReturn = true;
-//            }
-//            else
-//            {
-//                return false;
-//            }
-//        }
-        return toReturn;
+        for(int i=0;i<stack.size();i++)
+        {
+            if(!(stack.get(i).equals(that.pop())))
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

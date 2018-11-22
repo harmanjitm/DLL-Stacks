@@ -3,6 +3,14 @@ package utility;
 import exceptions.EmptyQueueException;
 
 public class Queue<E> implements QueueADT<E> {
+
+    DLL<E> queue;
+
+    public Queue()
+    {
+        queue = new DLL<>();
+    }
+
     /**
      * Enqueue will place the added item at the last position in the
      * queue.  This method will not allow <code>null</code> values
@@ -14,7 +22,11 @@ public class Queue<E> implements QueueADT<E> {
      */
     @Override
     public void enqueue(E toAdd) throws NullPointerException {
-
+        if(toAdd == null)
+        {
+            throw new NullPointerException();
+        }
+        queue.add(toAdd);
     }
 
     /**
@@ -25,7 +37,11 @@ public class Queue<E> implements QueueADT<E> {
      */
     @Override
     public E dequeue() throws EmptyQueueException {
-        return null;
+        if(queue.size() == 0)
+        {
+            throw new EmptyQueueException();
+        }
+        return queue.remove(0);
     }
 
     /**
@@ -37,7 +53,11 @@ public class Queue<E> implements QueueADT<E> {
      */
     @Override
     public E peek() throws EmptyQueueException {
-        return null;
+        if(queue.size() == 0)
+        {
+            throw new EmptyQueueException();
+        }
+        return queue.get(0);
     }
 
     /**
@@ -45,7 +65,7 @@ public class Queue<E> implements QueueADT<E> {
      */
     @Override
     public void dequeueAll() {
-
+        queue.clear();
     }
 
     /**
@@ -55,7 +75,7 @@ public class Queue<E> implements QueueADT<E> {
      */
     @Override
     public boolean isEmpty() {
-        return false;
+        return queue.size() == 0;
     }
 
     /**
@@ -65,7 +85,7 @@ public class Queue<E> implements QueueADT<E> {
      */
     @Override
     public Iterator<E> iterator() {
-        return null;
+        return queue.iterator();
     }
 
     /**
@@ -77,7 +97,18 @@ public class Queue<E> implements QueueADT<E> {
      */
     @Override
     public boolean equals(QueueADT<E> that) {
-        return false;
+        for(int i=0;i<queue.size();i++)
+        {
+            try {
+                if(!(queue.get(0).equals(that.dequeue())))
+                {
+                    return false;
+                }
+            } catch (EmptyQueueException e) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -89,7 +120,7 @@ public class Queue<E> implements QueueADT<E> {
      */
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        return queue.toArray();
     }
 
     /**
@@ -106,7 +137,18 @@ public class Queue<E> implements QueueADT<E> {
      */
     @Override
     public E[] toArray(E[] holder) throws NullPointerException {
-        return null;
+        if(holder == null)
+        {
+            throw new NullPointerException();
+        }
+        for(int i=0;i<queue.size();i++)
+        {
+            if(queue.get(i) == null)
+            {
+                throw new NullPointerException();
+            }
+        }
+        return queue.toArray(holder);
     }
 
     /**
@@ -118,7 +160,7 @@ public class Queue<E> implements QueueADT<E> {
      */
     @Override
     public boolean isFull() {
-        //Optional Method
+        //Optional
         return false;
     }
 
@@ -129,6 +171,6 @@ public class Queue<E> implements QueueADT<E> {
      */
     @Override
     public int size() {
-        return 0;
+        return queue.size();
     }
 }

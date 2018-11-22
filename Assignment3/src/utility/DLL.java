@@ -160,8 +160,8 @@ public class DLL<E> implements List<E>{
         else if (index == 0)
         {
             E toReturn = (E) head.value;
-            head = head.next;
             head.prev = null;
+            head = head.next;
             size--;
             return toReturn;
         }
